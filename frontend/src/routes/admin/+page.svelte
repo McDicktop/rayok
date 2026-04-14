@@ -496,11 +496,11 @@
         >
             <!-- Logo -->
             <div class="flex items-center gap-[10px]">
-                <span class="text-xl text-[#c9a84c]">✦</span>
-                <span
+                <button
                     class="font-['Playfair_Display'] text-xl tracking-[0.05em] text-[#e8e0d0]"
-                    >Студия «Раёк»</span
-                >
+                    on:click={() => goto('/')}
+                    >Студия «Раёк»
+                </button>
             </div>
 
             <!-- Tabs -->
@@ -1042,7 +1042,7 @@
                                                                 openMenuId =
                                                                     null;
                                                                 goto(
-                                                                    `/admin/event/${ev._id}`,
+                                                                    `/admin/event/${ev._id}?mode=edit`,
                                                                 );
                                                             }}
                                                             >Редактировать</button
@@ -1194,7 +1194,7 @@
                                                         </button>
                                                         {#if openMenuId === ev._id}
                                                             <div
-                                                                class="absolute top-full right-0 z-[9999] mt-1 min-w-[160px] overflow-hidden rounded-[3px] border border-[#a08c5b]/20 bg-[#1a1810] shadow-[0_12px_32px_rgba(0,0,0,0.75)]"
+                                                                class="absolute top-[-120px] right-0 z-[9999] mt-1 min-w-[160px] overflow-hidden rounded-[3px] border border-[#a08c5b]/20 bg-[#1a1810] shadow-[0_12px_32px_rgba(0,0,0,0.75)]"
                                                                 on:click|stopPropagation
                                                             >
                                                                 <button
@@ -1203,7 +1203,7 @@
                                                                         openMenuId =
                                                                             null;
                                                                         goto(
-                                                                            `/admin/event/${ev._id}`,
+                                                                            `/admin/event/${ev._id}?mode=edit`,
                                                                         );
                                                                     }}
                                                                     >Редактировать</button

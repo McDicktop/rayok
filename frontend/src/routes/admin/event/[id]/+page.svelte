@@ -4,6 +4,8 @@
     import { goto } from "$app/navigation";
     import Modal from "$lib/components/Modal.svelte";
 
+    $: mode = $page.url.searchParams.get('mode') || 'view';
+
     let showConfirm = false;
     const id = $page.params.id;
 
@@ -11,7 +13,7 @@
     let categories = [];
     let loading = true;
     let error = null;
-    let mode = "view"; // 'view' | 'edit'
+    // let mode = "view"; // 'view' | 'edit'
     let saving = false;
     let saveError = null;
     let deleting = false;
@@ -208,14 +210,12 @@
 <header class="sticky top-0 z-[100] border-b border-[#a08c5b]/20 bg-[rgba(17,16,9,0.92)] backdrop-blur-[12px]">
     <div class="max-w-[960px] mx-auto px-8 flex items-center justify-between h-16">
         <div class="flex items-center gap-[10px]">
-            <span class="text-[#c9a84c] text-xl">✦</span>
-            <span class="font-['Playfair_Display'] text-xl text-[#e8e0d0]">Студия</span>
+            <button
+             class="font-['Playfair_Display'] text-xl text-[#e8e0d0] cursor-pointer"
+            on:click={() => goto('/')}
+            >Студия "Раёк"
+            </button>
         </div>
-        <nav>
-            <a href="/" class="text-[0.8rem] tracking-widest uppercase text-[#9a9080] no-underline transition-colors hover:text-[#c9a84c]">
-                ← Мероприятия
-            </a>
-        </nav>
     </div>
 </header>
 
@@ -247,16 +247,6 @@
                     style="color:{statusColors[event.status]}; border-color:{statusColors[event.status]}44"
                 >
                     {statusLabels[event.status] ?? event.status}
-                </div>
-                <div class="flex gap-3">
-                    <button
-                        class="font-['Jost'] text-[0.72rem] font-medium tracking-widest uppercase px-5 py-[0.55rem] rounded-[3px] cursor-pointer transition-all bg-transparent border border-[#a08c5b]/30 text-[#9a9080] hover:border-[#c9a84c] hover:text-[#c9a84c]"
-                        on:click={() => (mode = "edit")}
-                    >Редактировать</button>
-                    <button
-                        class="font-['Jost'] text-[0.72rem] font-medium tracking-widest uppercase px-5 py-[0.55rem] rounded-[3px] cursor-pointer border transition-all bg-[rgba(192,57,43,0.1)] border-[rgba(192,57,43,0.4)] text-[#e07060] hover:bg-[rgba(192,57,43,0.2)]"
-                        on:click={() => (showConfirm = true)}
-                    >Удалить</button>
                 </div>
             </div>
 
@@ -597,7 +587,8 @@
                     <button
                         type="button"
                         class="font-['Jost'] text-xs font-medium tracking-widest uppercase px-8 py-[0.8rem] rounded-[3px] cursor-pointer transition-all bg-transparent border border-[#a08c5b]/30 text-[#9a9080] hover:border-[#c9a84c] hover:text-[#c9a84c]"
-                        on:click={() => { mode = "view"; fillForm(event); }}
+                        
+                        on:click={() => goto('/admin')}
                     >Отмена</button>
                     <button
                         type="submit"
