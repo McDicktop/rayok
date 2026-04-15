@@ -161,6 +161,7 @@ class EventController {
 
 			return res.status(201).json(event);
 		} catch (e) {
+			console.log(e);
 			return res.status(500).json({
 				message: "Internal server error",
 				error: "SERVER_ERROR",
