@@ -88,18 +88,18 @@ const EventSchema = new Schema(
 				type: String,
 				required: [true, "Cover images is required"],
 				trim: true,
-				validate: {
-					validator: (v) => IMAGE_URL_RE.test(v),
-					message: "Invalid image URL format",
-				},
+				// validate: {
+				// 	validator: (v) => IMAGE_URL_RE.test(v),
+				// 	message: "Invalid image URL format",
+				// },
 			},
 			gallery: {
 				type: [String],
 				default: [],
-				validate: {
-					validator: (arr) => arr.every((url) => IMAGE_URL_RE.test(url)),
-					message: "All gallery URLs mest be valid image URLs",
-				},
+				// validate: {
+				// 	validator: (arr) => arr.every((url) => IMAGE_URL_RE.test(url)),
+				// 	message: "All gallery URLs mest be valid image URLs",
+				// },
 			},
 		},
 
