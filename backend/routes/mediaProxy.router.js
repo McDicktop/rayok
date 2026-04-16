@@ -3,7 +3,7 @@ const router = new Router();
 const {s3, BUCKET} = require('../utils/s3');
 const {GetObjectCommand} = require("@aws-sdk/client-s3")
 
-router.get('/:key(*)', async (req, res) => {
+router.get('/{*key}', async (req, res) => {
     const key = req.params.key; // cover/uuid.png
     try {
         const command = new GetObjectCommand({ Bucket: BUCKET, Key: key});
