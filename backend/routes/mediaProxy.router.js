@@ -4,7 +4,10 @@ const { s3, BUCKET } = require("../utils/s3");
 const { GetObjectCommand } = require("@aws-sdk/client-s3");
 
 router.get("/{*key}", async (req, res) => {
-    const key = req.params.key; // cover/uuid.png
+    const rawKey = req.params.key;
+
+    const key = Array.isArray(rawKey) ? rawKey.join("/") : rawKey;
+
     try {
         const command = new GetObjectCommand({ Bucket: BUCKET, Key: key });
         const { Body, ContentType } = await s3.send(command);
@@ -25,7 +28,7 @@ router.get("/{*key}", async (req, res) => {
             res.end(Buffer.concat(chunks));
         }
     } catch (e) {
-        console.log(e)
+        console.log(e);
         res.status(404).json({ message: "Not found" });
     }
 });
