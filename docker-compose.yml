@@ -20,6 +20,19 @@ services:
       - "9000:9000"   
       - "9001:9001"  
 
+  minio-init:
+    image: minio/mc
+    depends_on:
+      - minio
+    entrypoint: >
+      sh -c "
+        sleep 5 &&
+        mc alias set local http://minio:9000 minioadmin minioadmin &&
+        mc mb --ignore-existing local/rayok &&
+        mc anonymous set public local/rayok
+      "
+    restart: on-failure
+
   backend:
     build: ./backend
     restart: always
@@ -40,4 +53,3 @@ services:
 volumes:
   mongo_data:
   minio_data:
-

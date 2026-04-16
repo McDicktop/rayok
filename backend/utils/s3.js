@@ -30,7 +30,7 @@ const uploadToS3 = async(file, folder = "uploads") => {
     );
 
     // MINIO URL
-    return `${process.env.S3_ENDPOINT}/${BUCKET}/${key}`;
+    return `/api/media/${key}`;
 }
 
 const listS3Objects = async (prefix = "") => {
@@ -58,4 +58,4 @@ const deleteFromS3 = async (key) => {
     )
 }
 
-module.exports = { uploadToS3, listS3Objects, deleteFromS3 };
+module.exports = { uploadToS3, listS3Objects, deleteFromS3, s3, BUCKET };
